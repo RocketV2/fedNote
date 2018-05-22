@@ -120,33 +120,37 @@ if (process.env.NODE_ENV === 'production') {
 
 ```
 // webpack3 压缩css 提取css
-	module:{
-		rules:[{
-				test: /(\.jsx|\.js)$/,
-	            use: ["babel-loader?presets[]=env,presets[]=react"],
-	            exclude: /node_modules/
-			},{
-				test: /\.css$/,
 
-				// 通过参数 minimize 压缩css
-				use: ExtractTextPlugin.extract({
-		          fallback: "style-loader",
-		          use: ["css-loader?minimize"]
-		        }),
-				exclude: /node_modules/
-			}
-		]
-	},
+module:{
+	rules:[{
+            test: /(\.jsx|\.js)$/,
+            use: ["babel-loader?presets[]=env,presets[]=react"],
+            exclude: /node_modules/
+		},{
+			test: /\.css$/,
 
-	// 配置需要的plugins
-	plugins:[
-		// 生成入口文件HTML
-		new HtmlWebpackPlugin({
-            template: app_path + "/index.html"
-        }),
-		// 提取css文件
-        new ExtractTextPlugin("styles.css"),
+			// 通过参数 minimize 压缩css
+			use: ExtractTextPlugin.extract({
+               fallback: "style-loader",
+               use: ["css-loader?minimize"]
+            }),
+            
+			exclude: /node_modules/
+		}
 	]
+},
+
+// 配置需要的plugins
+plugins:[
+
+	// 生成入口文件HTML
+	new HtmlWebpackPlugin({
+        template: app_path + "/index.html"
+    }),
+
+	// 提取css文件
+    new ExtractTextPlugin("styles.css"),
+]
 ```
 
 
