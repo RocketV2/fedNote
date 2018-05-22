@@ -4,6 +4,8 @@
 
 > 先学习个单词 bundle [ˈbʌndl] n.'捆;一批（同类事物或出售的货品）'
 
+> [相对webpack3，webpack4改动了什么](https://auth0.com/blog/webpack-4-release-what-is-new/)
+
 #### webpack4 对webpack进行了拆分
 
 > webpack3中，webpack库中集结了webpack-cli，因此只需要安装webpack就能当做可执行文件使用；
@@ -134,7 +136,7 @@ module:{
                fallback: "style-loader",
                use: ["css-loader?minimize"]
             }),
-            
+
 			exclude: /node_modules/
 		}
 	]
