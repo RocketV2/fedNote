@@ -118,6 +118,36 @@ if (process.env.NODE_ENV === 'production') {
 > 插件extract-text-webpack-plugin是用来将css文件从bundle.js中独立出来的；但是在webpack4中无法使用；
 > 在下载安装此插件时，也会提示需要匹配webpack3
 
+```
+// webpack3 压缩css 提取css
+	module:{
+		rules:[{
+				test: /(\.jsx|\.js)$/,
+	            use: ["babel-loader?presets[]=env,presets[]=react"],
+	            exclude: /node_modules/
+			},{
+				test: /\.css$/,
+
+				// 通过参数 minimize 压缩css
+				use: ExtractTextPlugin.extract({
+		          fallback: "style-loader",
+		          use: ["css-loader?minimize"]
+		        }),
+				exclude: /node_modules/
+			}
+		]
+	},
+
+	// 配置需要的plugins
+	plugins:[
+		// 生成入口文件HTML
+		new HtmlWebpackPlugin({
+            template: app_path + "/index.html"
+        }),
+		// 提取css文件
+        new ExtractTextPlugin("styles.css"),
+	]
+```
 
 
 
